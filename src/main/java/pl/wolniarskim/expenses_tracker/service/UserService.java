@@ -17,6 +17,8 @@ public class UserService implements UserDetailsService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+
+
         User user = new User("test",encoder().encode("test123"), "test@wp.pl");
         this.userRepository.save(user);
     }
