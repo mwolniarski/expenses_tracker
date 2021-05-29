@@ -10,9 +10,18 @@ create table products(
 create table expenses(
     id int primary key AUTO_INCREMENT,
     purchase_date date,
-    product_id int,
     paymentAmount decimal
+);
+create table product_lines(
+    id int primary key AUTO_INCREMENT,
+    product_id int,
+    expense_id int,
+    quantity int,
+    unit_price decimal,
+    total_price decimal
 );
 
 alter table products add foreign key(category_name) references categories(name);
-alter table expenses add foreign key(product_id) references products(id);
+
+alter table product_lines add foreign key(product_id) references products(id);
+alter table product_lines add foreign key(expense_id) references expenses(id);
