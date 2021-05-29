@@ -36,9 +36,10 @@ public class ExpenseService {
     public String uploadFile(MultipartFile file) throws IOException, TesseractException {
         ITesseract tesseract = new Tesseract();
 
-        File tessDataFolder = LoadLibs.extractTessResources("tessdata");
-        System.out.println(tessDataFolder.getAbsolutePath());
-        tesseract.setDatapath("");
+//        File tessDataFolder = LoadLibs.extractTessResources("tessdata");
+//        System.out.println(tessDataFolder.getAbsolutePath());
+//        tesseract.setDatapath(tessDataFolder.getAbsolutePath());
+        tesseract.setDatapath("/tessdata");
         tesseract.setLanguage("pol");
         tesseract.setOcrEngineMode(2);
         tesseract.setTessVariable("user_defined_dpi", "300");
