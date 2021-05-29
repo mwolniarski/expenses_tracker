@@ -34,10 +34,13 @@ public class ExpenseService {
     }
 
     public String uploadFile(MultipartFile file) throws IOException, TesseractException {
-        Tesseract tesseract = new Tesseract();
-
-        tesseract.setDatapath("src/main/resources/tessdata");
+        ITesseract tesseract = new Tesseract();
+        File tessDataFolder = LoadLibs.extractTessResources("tessdata");
+        tesseract.setDatapath(tessDataFolder.getAbsolutePath());
         tesseract.setLanguage("pol");
+        tesseract.setOcrEngineMode(2);
+        tesseract.setTessVariable("user_defined_dpi", "300");
+        tesseract.setPageSegMode(1);
         BufferedImage image = ImageIO.read(file.getInputStream());
 
         String text = tesseract.doOCR(image);
