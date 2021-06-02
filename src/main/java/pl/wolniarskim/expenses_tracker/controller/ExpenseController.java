@@ -29,7 +29,7 @@ public class ExpenseController {
     }
 
     @PostMapping("/uploadFile")
-    public String tesseractTest(@RequestParam("file") MultipartFile file) throws IOException, TesseractException {
+    public Expense tesseractTest(@RequestParam("file") MultipartFile file) throws IOException, TesseractException {
         return expenseService.uploadFile(file);
     }
 }
