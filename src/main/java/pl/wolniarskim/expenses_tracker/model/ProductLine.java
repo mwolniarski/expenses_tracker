@@ -48,6 +48,7 @@ public class ProductLine {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+        this.totalPrice = this.quantity * this.unitPrice;
     }
 
     public double getUnitPrice() {
@@ -56,6 +57,7 @@ public class ProductLine {
 
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
+        this.totalPrice = this.quantity * this.unitPrice;
     }
 
     public double getTotalPrice() {
