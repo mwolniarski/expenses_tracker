@@ -1,35 +1,31 @@
 package pl.wolniarskim.expenses_tracker.controller;
 
-import net.sourceforge.tess4j.TesseractException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.wolniarskim.expenses_tracker.model.Expense;
 import pl.wolniarskim.expenses_tracker.service.ExpenseService;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
-@RequestMapping("/expenses")
+@RequestMapping("/api/expenses")
 public class ExpenseController {
 
-    private ExpenseService expenseService;
+    private final ExpenseService expenseService;
 
     public ExpenseController(ExpenseService expenseService) {
         this.expenseService = expenseService;
     }
 
     @PostMapping
-    public Expense createExpense(@RequestBody Expense expense){
-        return expenseService.createExpense(expense);
+    public ResponseEntity<Expense> createExpense(@RequestBody Expense expense){
+        return ResponseEntity.ok(expenseService.createExpense(expense));
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteExpense(@PathVariable("id") long id){
-        expenseService.deleteExpense(id);
-    }
-
-    @PostMapping("/uploadFile")
-    public Expense tesseractTest(@RequestParam("file") MultipartFile file) throws IOException, TesseractException {
-        return expenseService.uploadFile(file);
+    @GetMapping
+    public ResponseEntity<List<Expense>> getAllExpenses(){
+        return ResponseEntity.ok(expenseService.getAll());
     }
 }

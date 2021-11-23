@@ -1,27 +1,23 @@
-create table categories(
-    name varchar(40) primary key
-);
-create table products(
-    id int primary key AUTO_INCREMENT,
-    category_name varchar(40),
-    product_name varchar(40),
-    description varchar(120)
-);
 create table expenses(
     id int primary key AUTO_INCREMENT,
-    purchase_date date,
-    paymentAmount decimal
+    expense_date date,
+    created_time date,
+    record_owner_id int,
+    payment_method varchar(20),
+    expense_category varchar(20),
+    payment_amount decimal,
+    note varchar(120)
 );
-create table product_lines(
-    id int primary key AUTO_INCREMENT,
-    product_id int,
-    expense_id int,
-    quantity int,
-    unit_price decimal,
-    total_price decimal
+create table incomes(
+   id int primary key AUTO_INCREMENT,
+   income_date date,
+   created_time date,
+   record_owner_id int,
+   payment_method varchar(20),
+   income_category varchar(20),
+   payment_amount decimal,
+   note varchar(120)
 );
 
-alter table products add foreign key(category_name) references categories(name);
-
-alter table product_lines add foreign key(product_id) references products(id);
-alter table product_lines add foreign key(expense_id) references expenses(id);
+alter table incomes add foreign key(record_owner_id) references users(id);
+alter table expenses add foreign key(record_owner_id) references users(id);

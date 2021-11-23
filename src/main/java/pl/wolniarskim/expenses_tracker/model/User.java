@@ -1,11 +1,13 @@
 package pl.wolniarskim.expenses_tracker.model;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
 
+@Data
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
